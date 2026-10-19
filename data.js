@@ -1,0 +1,26 @@
+(function(root){
+const profiles = {
+ f:{name:'Fleumático',color:'#649384',word:'Serenidade',description:'Nas suas respostas, aparecem paciência, escuta e preferência por estabilidade. Você tende a criar espaço para os outros e a buscar acordos.',strength:'Escutar, mediar diferenças e manter a constância.',care:'Observe quando preservar a paz faz você adiar uma conversa ou esconder uma necessidade.',practice:'Escolha uma preferência sua e expresse-a de forma clara, mesmo em uma decisão pequena.'},
+ c:{name:'Colérico',color:'#c07851',word:'Direção',description:'Nas suas respostas, aparecem iniciativa, assertividade e foco em resolver. Você tende a dar direção às situações e transformar objetivos em ação.',strength:'Tomar iniciativa, decidir e mobilizar esforços.',care:'Observe quando a pressa por resolver reduz o espaço para ouvir ou revisar uma decisão.',practice:'Antes de decidir com alguém, pergunte qual preocupação ainda precisa ser ouvida.'},
+ s:{name:'Sanguíneo',color:'#c69a33',word:'Expressão',description:'Nas suas respostas, aparecem entusiasmo, espontaneidade e interesse por conexão. Você tende a trazer energia às interações e a explorar possibilidades.',strength:'Criar vínculos, comunicar ideias e trazer entusiasmo.',care:'Observe quando a busca por novidade dificulta concluir algo ou sustentar compromissos.',practice:'Transforme uma ideia que anima você em uma pequena entrega com horário definido.'},
+ m:{name:'Melancólico',color:'#8881b8',word:'Profundidade',description:'Nas suas respostas, aparecem reflexão, sensibilidade e atenção aos detalhes. Você tende a procurar sentido e a cuidar da qualidade do que faz.',strength:'Analisar com cuidado, perceber nuances e preparar-se.',care:'Observe quando a exigência por qualidade vira autocrítica ou impede um primeiro passo.',practice:'Defina o que é suficiente para uma tarefa pequena e conclua sem buscar perfeição.'}
+};
+// Cada tema contém um item por temperamento. Todos têm o mesmo peso.
+const themes = [
+ {name:'Conexões',icon:'01',title:'Como você se aproxima das pessoas?',hint:'Pense nas suas interações mais comuns, sem tentar escolher a resposta ideal.',items:[
+ ['f','Acolhedor(a)','Escuto com paciência e procuro deixar as pessoas à vontade.'],['s','Comunicativo(a)','Inicio conversas com entusiasmo e demonstro o que sinto.'],['m','Observador(a)','Observo o ambiente antes de me abrir e valorizo conversas profundas.'],['c','Assertivo(a)','Expresso minhas preferências com firmeza e tomo a iniciativa.']]},
+ {name:'Decisões',icon:'02',title:'O que guia suas escolhas?',hint:'Considere decisões do dia a dia, quando você tem liberdade para escolher.',items:[
+ ['m','Criterioso(a)','Comparo detalhes e consequências antes de escolher.'],['c','Decidido(a)','Tomo uma decisão e assumo a responsabilidade pelo próximo passo.'],['f','Conciliador(a)','Procuro uma escolha que preserve o equilíbrio entre as pessoas.'],['s','Intuitivo(a)','Escolho com entusiasmo aquilo que desperta meu interesse no momento.']]},
+ {name:'Rotina',icon:'03',title:'Como você faz as coisas acontecerem?',hint:'Pense em estudos, projetos pessoais ou trabalho nos últimos meses.',items:[
+ ['s','Espontâneo(a)','Gosto de variar atividades e me entusiasmo com novas ideias.'],['f','Constante','Prefiro um ritmo estável e sigo com paciência nas tarefas.'],['c','Determinado(a)','Defino um objetivo e avanço com foco em concluir.'],['m','Meticuloso(a)','Organizo etapas e reviso detalhes para garantir qualidade.']]},
+ {name:'Desafios',icon:'04',title:'Como você reage quando algo aperta?',hint:'Lembre-se de contratempos cotidianos, sem pensar apenas no seu pior dia.',items:[
+ ['c','Resolutivo(a)','Quando surge um problema, assumo a frente e busco uma saída rápida.'],['m','Reflexivo(a)','Repasso o que aconteceu e examino com cuidado o que pode dar errado.'],['s','Expressivo(a)','Compartilho minha reação e procuro apoio na conversa com outras pessoas.'],['f','Paciente','Mantenho um ritmo calmo e dou tempo para a situação se acomodar.']]},
+ {name:'Diferenças',icon:'05',title:'Como você lida com discordâncias?',hint:'Considere relações em que você se sente seguro(a) para ser você.',items:[
+ ['f','Diplomático(a)','Busco um acordo e cedo em pontos menores para manter a harmonia.'],['c','Franco(a)','Falo diretamente sobre o problema e defendo minha posição.'],['m','Ponderado(a)','Escolho as palavras com cuidado e reflito sobre a crítica depois.'],['s','Expansivo(a)','Expresso o que sinto na conversa e tento recuperar a proximidade.']]},
+ {name:'Novidades',icon:'06',title:'Como você entra em uma nova fase?',hint:'Pense em um grupo, um projeto ou uma experiência que acabou de começar.',items:[
+ ['m','Cuidadoso(a)','Pesquiso e me preparo antes de me envolver por completo.'],['s','Entusiasmado(a)','Mergulho nas possibilidades e me conecto rapidamente às pessoas.'],['c','Proativo(a)','Identifico o que precisa ser feito e proponho uma direção.'],['f','Tranquilo(a)','Me adapto aos poucos e procuro construir uma base estável.']]}
+];
+themes.forEach((t,i)=>t.items=t.items.map(([type,adjective,text],j)=>({id:`t${i}i${j}`,type,adjective,text})));
+const data = {profiles,themes,version:1};
+if(typeof module!=='undefined')module.exports=data;else root.TraitsData=data;
+})(globalThis);

@@ -1,0 +1,12 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const {themes}=require('./data.js');
+const {calculate}=require('./score.js');
+const answers=(fn)=>Object.fromEntries(themes.flatMap(t=>t.items.map(i=>[i.id,fn(i)])));
+test('24 itens únicos, seis itens por tipo e um por tema',()=>{assert.equal(new Set(themes.flatMap(t=>t.items.map(i=>i.id))).size,24);for(const t of themes)assert.equal(new Set(t.items.map(i=>i.type)).size,4);});
+test('cada tipo pode liderar sozinho',()=>{for(const type of ['f','c','s','m']){const r=calculate(themes,answers(i=>i.type===type?4:0));assert.deepEqual(r.leaders,[type]);assert.equal(r.ranked[0].percent,100);assert.equal(r.ranked[0].score,24);}});
+test('empate completo não produz vencedor arbitrário',()=>{const r=calculate(themes,answers(()=>2));assert.equal(r.leaders.length,4);assert.ok(r.ranked.every(x=>x.percent===25));});
+test('empate entre dois preserva os dois líderes',()=>{const r=calculate(themes,answers(i=>['f','m'].includes(i.type)?4:0));assert.deepEqual(new Set(r.leaders),new Set(['f','m']));});
+test('pontuações próximas são reconhecidas',()=>{const a=answers(()=>3);a[themes[0].items.find(i=>i.type==='f').id]=4;const r=calculate(themes,a);assert.equal(r.close,true);});
+test('todos zeros: sem perfil, sem NaN',()=>{const r=calculate(themes,answers(()=>0));assert.equal(r.empty,true);assert.ok(r.ranked.every(x=>x.percent===0));});
+test('respostas incompletas, strings e valores fora da escala são rejeitados',()=>{assert.throws(()=>calculate(themes,{}));for(const bad of [-1,5,NaN,'4',null,1.5]){const a=answers(()=>2);a.t0i0=bad;assert.throws(()=>calculate(themes,a));}});
