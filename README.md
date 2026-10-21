@@ -12,11 +12,15 @@ Também é possível abrir `index.html` diretamente, com duplo clique. O salvame
 
 Se a porta estiver ocupada, no PowerShell use `$env:PORT=4174` e rode `npm start`. Para parar o servidor, pressione Ctrl+C no terminal.
 
-## O que está incluído
+## Publicar na Vercel
+
+Importe este repositório na Vercel e clique em Deploy. O arquivo `vercel.json` configura a aplicação como site estático: o build `node build.cjs` copia somente os seis arquivos públicos para `dist/`. A pasta raiz selecionada deve ser a que contém `index.html` e `vercel.json`. Não use `npm start` como comando de build. Após publicar, compartilhe o endereço de produção para que outras pessoas possam usar o teste no celular, sem depender do seu computador. Cada navegador mantém suas próprias respostas.
+
+## Recursos
 
 - 24 afirmações em seis etapas: conexões, decisões, rotina, desafios, diferenças e novidades.
 - Escala de 0 a 4 para cada adjetivo em contexto; sem seleção forçada entre os quatro tipos.
-- Progresso salvo no localStorage, com retomada, revisão e exclusão pelo aplicativo.
+- Salvamento opcional no localStorage por até sete dias, com retomada, revisão e exclusão em qualquer etapa. Sem autorização, as respostas ficam somente na memória da aba.
 - Distribuição dos pontos, empates, perfis próximos, contribuições por tema e adjetivos mais reconhecidos.
 - Download do resultado em JSON e impressão/PDF pelo navegador.
 - Layout responsivo e controles utilizáveis pelo teclado.
@@ -35,6 +39,7 @@ Esta versão não integra nem baixa a Laya. Para escolhas já estruturadas, a so
 
 ## Verificação
 
-Execute `npm test` para testar balanceamento, os quatro líderes possíveis, empates, proximidade, zeros e respostas inválidas. Execute `node --check app.js` para verificar sintaxe.
+Execute `npm test` para testar o cálculo e as proteções de privacidade, incluindo consentimento, expiração, dados adulterados e arquivos publicados. Execute `node --check app.js` para verificar sintaxe.
 
-Os dados ficam apenas no navegador. A retomada é vinculada à origem (endereço e porta); abrir por outro endereço não compartilha o progresso. Limpar os dados do navegador remove as respostas. O download contém suas respostas: guarde onde preferir.
+As respostas do teste ficam apenas no navegador. A hospedagem pode processar dados técnicos das requisições. Por padrão, recarregar ou fechar a aba perde o progresso; marque a opção de salvar se quiser retomá-lo depois. Consulte `SECURITY.md` para as proteções e seus limites. A retomada é vinculada à origem (endereço e porta); abrir por outro endereço não compartilha o progresso. Limpar os dados do navegador remove as respostas. O download contém suas respostas: guarde onde preferir.
+
