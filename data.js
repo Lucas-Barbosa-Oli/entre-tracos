@@ -5,22 +5,47 @@ const profiles = {
  s:{name:'Sanguíneo',color:'#c69a33',word:'Expressão',description:'Nas suas respostas, aparecem entusiasmo, espontaneidade e interesse por conexão. Você tende a trazer energia às interações e a explorar possibilidades.',strength:'Criar vínculos, comunicar ideias e trazer entusiasmo.',care:'Observe quando a busca por novidade dificulta concluir algo ou sustentar compromissos.',practice:'Transforme uma ideia que anima você em uma pequena entrega com horário definido.'},
  m:{name:'Melancólico',color:'#8881b8',word:'Profundidade',description:'Nas suas respostas, aparecem reflexão, sensibilidade e atenção aos detalhes. Você tende a procurar sentido e a cuidar da qualidade do que faz.',strength:'Analisar com cuidado, perceber nuances e preparar-se.',care:'Observe quando a exigência por qualidade vira autocrítica ou impede um primeiro passo.',practice:'Defina o que é suficiente para uma tarefa pequena e conclua sem buscar perfeição.'}
 };
-// Cada tema contém um item por temperamento. Todos têm o mesmo peso.
+// Associação autoral para reflexão, sem validação psicométrica.
+// Seis itens por tipo, com dois de pontuação inversa por tipo.
 const themes = [
- {name:'Conexões',icon:'01',title:'Como você se aproxima das pessoas?',hint:'Pense nas suas interações mais comuns, sem tentar escolher a resposta ideal.',items:[
- ['f','Acolhedor(a)','Escuto com paciência e procuro deixar as pessoas à vontade.'],['s','Comunicativo(a)','Inicio conversas com entusiasmo e demonstro o que sinto.'],['m','Observador(a)','Observo o ambiente antes de me abrir e valorizo conversas profundas.'],['c','Assertivo(a)','Expresso minhas preferências com firmeza e tomo a iniciativa.']]},
- {name:'Decisões',icon:'02',title:'O que guia suas escolhas?',hint:'Considere decisões do dia a dia, quando você tem liberdade para escolher.',items:[
- ['m','Criterioso(a)','Comparo detalhes e consequências antes de escolher.'],['c','Decidido(a)','Tomo uma decisão e assumo a responsabilidade pelo próximo passo.'],['f','Conciliador(a)','Procuro uma escolha que preserve o equilíbrio entre as pessoas.'],['s','Intuitivo(a)','Escolho com entusiasmo aquilo que desperta meu interesse no momento.']]},
- {name:'Rotina',icon:'03',title:'Como você faz as coisas acontecerem?',hint:'Pense em estudos, projetos pessoais ou trabalho nos últimos meses.',items:[
- ['s','Espontâneo(a)','Gosto de variar atividades e me entusiasmo com novas ideias.'],['f','Constante','Prefiro um ritmo estável e sigo com paciência nas tarefas.'],['c','Determinado(a)','Defino um objetivo e avanço com foco em concluir.'],['m','Meticuloso(a)','Organizo etapas e reviso detalhes para garantir qualidade.']]},
- {name:'Desafios',icon:'04',title:'Como você reage quando algo aperta?',hint:'Lembre-se de contratempos cotidianos, sem pensar apenas no seu pior dia.',items:[
- ['c','Resolutivo(a)','Quando surge um problema, assumo a frente e busco uma saída rápida.'],['m','Reflexivo(a)','Repasso o que aconteceu e examino com cuidado o que pode dar errado.'],['s','Expressivo(a)','Compartilho minha reação e procuro apoio na conversa com outras pessoas.'],['f','Paciente','Mantenho um ritmo calmo e dou tempo para a situação se acomodar.']]},
- {name:'Diferenças',icon:'05',title:'Como você lida com discordâncias?',hint:'Considere relações em que você se sente seguro(a) para ser você.',items:[
- ['f','Diplomático(a)','Busco um acordo e cedo em pontos menores para manter a harmonia.'],['c','Franco(a)','Falo diretamente sobre o problema e defendo minha posição.'],['m','Ponderado(a)','Escolho as palavras com cuidado e reflito sobre a crítica depois.'],['s','Expansivo(a)','Expresso o que sinto na conversa e tento recuperar a proximidade.']]},
- {name:'Novidades',icon:'06',title:'Como você entra em uma nova fase?',hint:'Pense em um grupo, um projeto ou uma experiência que acabou de começar.',items:[
- ['m','Cuidadoso(a)','Pesquiso e me preparo antes de me envolver por completo.'],['s','Entusiasmado(a)','Mergulho nas possibilidades e me conecto rapidamente às pessoas.'],['c','Proativo(a)','Identifico o que precisa ser feito e proponho uma direção.'],['f','Tranquilo(a)','Me adapto aos poucos e procuro construir uma base estável.']]}
+ {name:'Convivência',items:[
+ ['f','Ao combinar um passeio, há duas opções que me servem. Deixo a escolha com quem faz mais questão de uma delas.'],
+ ['s','Encontro alguém no caminho de um compromisso. A conversa rende mais do que eu previa e preciso reorganizar meu horário.'],
+ ['m','Depois de uma conversa que terminou de modo estranho, volto mentalmente às palavras para entender o que ficou mal resolvido.'],
+ ['c','Um grupo troca mensagens há dias sobre um encontro. Envio uma proposta com horário e local para que algo fique definido.']]},
+ {name:'Escolhas',items:[
+ ['m','Antes de aceitar uma proposta aparentemente boa, procuro o detalhe que poderia mudar minha decisão.'],
+ ['c','Preciso escolher entre duas soluções razoáveis e tenho pouco tempo. Prefiro decidir com o que sei e ajustar depois.'],
+ ['f','Um plano já combinado deixa de me agradar. Proponho mudá-lo mesmo quando o grupo prefere mantê-lo.',true],
+ ['s','Recebo uma notícia boa. Espero uma ocasião para contar, em vez de procurar alguém naquele momento.',true]]},
+ {name:'Atividades',items:[
+ ['s','Começo uma tarefa e surge uma ideia interessante para outra coisa. Abro espaço para experimentá-la antes de terminar o que fazia.'],
+ ['f','Estou aprendendo algo que exige repetição. Continuo praticando mesmo depois de passar o interesse da novidade.'],
+ ['c','Percebo uma tarefa sem responsável num grupo do qual faço parte. Espero alguém assumir antes de me oferecer.',true],
+ ['m','Preparo algo para outras pessoas. Encerro quando cumpre a função, mesmo percebendo detalhes que poderia melhorar.',true]]},
+ {name:'Imprevistos',items:[
+ ['c','Um imprevisto muda o que eu tinha planejado. Minha primeira preocupação é definir o que consigo resolver agora.'],
+ ['m','Algo que preparei sai diferente do esperado. Mesmo depois de resolver o problema, continuo pensando nessa diferença.'],
+ ['s','Algo dá errado no meu dia. Conto o episódio a alguém enquanto ainda estou entendendo como me sinto.'],
+ ['f','Uma fila para de andar sem explicação. Acompanho por algum tempo antes de procurar outra solução.']]},
+ {name:'Conversas difíceis',items:[
+ ['f','Depois de uma conversa difícil, sinto necessidade de retomar o assunto logo, mesmo que a outra pessoa peça um tempo.',true],
+ ['c','Alguém de quem gosto pede algo que atrapalha um compromisso meu. Digo que não posso antes de procurar uma alternativa.'],
+ ['m','Recebo uma crítica sobre algo que fiz. Assim que entendo o ajuste necessário, deixo o episódio para trás.',true],
+ ['s','Uma conversa fica animada. Guardo minhas reações por um momento para organizar o que quero dizer.',true]]},
+ {name:'Experiências novas',items:[
+ ['m','Vou participar de uma atividade desconhecida. Procuro saber como será a experiência, mesmo podendo aprender enquanto faço.'],
+ ['s','Um convite de última hora muda uma tarde livre. Viver uma experiência diferente pesa mais para mim que manter o plano inicial.'],
+ ['c','Entro num projeto em grupo. Prefiro receber uma parte definida a escolher o rumo do trabalho.',true],
+ ['f','Chego a um grupo que já tem uma rotina. Primeiro acompanho como as coisas funcionam antes de sugerir mudanças.']]}
 ];
-themes.forEach((t,i)=>t.items=t.items.map(([type,adjective,text],j)=>({id:`t${i}i${j}`,type,adjective,text})));
-const data = {profiles,themes,version:1};
+themes.forEach((t,i)=>t.items=t.items.map(([type,text,reverse=false],j)=>({id:`t${i}i${j}`,type,text,reverse})));
+function createPages(source=themes,random=Math.random){
+ const items=source.flatMap(t=>t.items);
+ for(let i=items.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[items[i],items[j]]=[items[j],items[i]];}
+ const titles=['Olhe para situações que já viveu.','Lembre de exemplos concretos.','Considere também os dias comuns.','Pense em diferentes contextos.','Observe suas primeiras reações.','Mais algumas cenas para refletir.'];
+ return titles.map((title,i)=>({name:`Etapa ${i+1}`,icon:String(i+1).padStart(2,'0'),title,hint:'Nos últimos meses, em situações parecidas, com que frequência você agiu assim? Pense no que aconteceu, não no que seria ideal.',items:items.slice(i*4,i*4+4)}));
+}
+const data={profiles,themes,createPages,version:2};
 if(typeof module!=='undefined')module.exports=data;else root.TraitsData=data;
 })(globalThis);

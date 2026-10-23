@@ -18,16 +18,16 @@ Importe este repositório na Vercel e clique em Deploy. O arquivo `vercel.json` 
 
 ## Recursos
 
-- 24 afirmações em seis etapas: conexões, decisões, rotina, desafios, diferenças e novidades.
-- Escala de 0 a 4 para cada adjetivo em contexto; sem seleção forçada entre os quatro tipos.
-- Salvamento opcional no localStorage por até sete dias, com retomada, revisão e exclusão em qualquer etapa. Sem autorização, as respostas ficam somente na memória da aba.
-- Distribuição dos pontos, empates, perfis próximos, contribuições por tema e adjetivos mais reconhecidos.
+- 24 situações concretas, misturadas entre seis etapas a cada novo teste. Os temas ficam disponíveis apenas na análise final.
+- Escala de frequência de 0 (nunca) a 4 (quase sempre), sem nomes de traços durante as respostas.
+- Respostas somente na memória da aba, sem opção de salvamento. Recarregar ou fechar a página perde o progresso. A revisão e a exclusão continuam disponíveis.
+- Distribuição dos pontos, empates, perfis próximos, contribuições por tema e exemplos concretos das respostas.
 - Download do resultado em JSON e impressão/PDF pelo navegador.
 - Layout responsivo e controles utilizáveis pelo teclado.
 
 ## Algoritmo e limites
 
-`data.js` contém os itens e perfis; `score.js` calcula o resultado. Cada tema possui um item por tipo. Cada tipo acumula entre 0 e 24 pontos, todos com peso igual. Sua porcentagem é `pontos do tipo / soma dos quatro tipos * 100`. Não é probabilidade nem avaliação absoluta de intensidade. Empates exatos não recebem desempate. Diferenças menores que 5 pontos percentuais indicam perfis próximos; esse corte é uma escolha editorial, sem validação estatística. Todas as respostas zero produzem um resultado sem perfil.
+`data.js` contém os itens e perfis; `score.js` calcula o resultado. Cada tema possui um item por tipo. Cada tipo acumula entre 0 e 24 pontos, todos com peso igual: quatro itens diretos e dois inversos por tipo. Nos inversos, a contribuição é `4 - resposta`; nos demais, é a resposta. Essa escolha é autoral, sem validação psicométrica. Sua porcentagem é `pontos do tipo / soma dos quatro tipos * 100`. Não é probabilidade nem avaliação absoluta de intensidade. Empates exatos não recebem desempate. Diferenças menores que 5 pontos percentuais indicam perfis próximos; esse corte é uma escolha editorial, sem validação estatística. Zero pontos após a aplicação da direção dos itens produz um resultado sem perfil. Responder com a mesma frequência em todas as situações gera uma distribuição igual e um aviso de pouca diferenciação, sem acusar respostas falsas.
 
 Este é um questionário autoral de reflexão, não um instrumento psicológico validado ou diagnóstico. Não afirmamos que estes são os melhores temas científicos. A classificação histórica em quatro temperamentos não deve ser tratada como uma medida definitiva da personalidade. Para pesquisa sobre traços contemporâneos: https://www.ocf.berkeley.edu/~johnlab/bfi.htm
 
@@ -39,7 +39,11 @@ Esta versão não integra nem baixa a Laya. Para escolhas já estruturadas, a so
 
 ## Verificação
 
-Execute `npm test` para testar o cálculo e as proteções de privacidade, incluindo consentimento, expiração, dados adulterados e arquivos publicados. Execute `node --check app.js` para verificar sintaxe.
+Execute `npm test` para testar o cálculo e as proteções de privacidade, incluindo remoção do armazenamento antigo, ausência de persistência e arquivos publicados, além de itens inversos e mistura das perguntas. Execute `node --check app.js` para verificar sintaxe.
 
-As respostas do teste ficam apenas no navegador. A hospedagem pode processar dados técnicos das requisições. Por padrão, recarregar ou fechar a aba perde o progresso; marque a opção de salvar se quiser retomá-lo depois. Consulte `SECURITY.md` para as proteções e seus limites. A retomada é vinculada à origem (endereço e porta); abrir por outro endereço não compartilha o progresso. Limpar os dados do navegador remove as respostas. O download contém suas respostas: guarde onde preferir.
+As respostas do teste ficam apenas no navegador. A hospedagem pode processar dados técnicos das requisições. Recarregar ou fechar a aba perde o progresso. Esta versão tenta remover o teste salvo pelas versões anteriores e não reutiliza suas respostas, pois as situações e a pontuação mudaram. Consulte `SECURITY.md` para as proteções e seus limites. Use “Apagar minhas respostas” para limpar o teste atual na aba. O download contém suas respostas: guarde onde preferir.
 
+
+## Revisão das situações (versão 2)
+
+As situações foram reescritas sem rótulos de adjetivos e com escolhas que envolvem contexto ou concessões. A ordem é misturada na memória a cada novo teste e se mantém durante a navegação e revisão. O cálculo segue transparente no código e na explicação do resultado. Isso procura reduzir indução, mas não impede que alguém escolha respostas para atingir um resultado. Não há detector de mentira, escala validada ou promessa de resistência à manipulação. A interpretação deve ser revisada com participantes e profissionais antes de alegar qualidade psicométrica. Resultados antigos não são diretamente comparáveis aos novos.
