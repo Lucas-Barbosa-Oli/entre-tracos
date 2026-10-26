@@ -7,7 +7,9 @@ function calculate(themes,answers){
  const total=Object.values(scores).reduce((a,b)=>a+b,0);
  const ranked=Object.keys(scores).map(type=>({type,score:scores[type],max:counts[type]*4,percent:total?scores[type]/total*100:0})).sort((a,b)=>b.score-a.score);
  const leaders=ranked.filter(x=>x.score===ranked[0].score).map(x=>x.type);
- return {scores,total,ranked,leaders,empty:total===0,close:total>0&&ranked[0].percent-ranked[1].percent<5,uniform:new Set(themes.flatMap(t=>t.items.map(i=>answers[i.id]))).size===1};
+ // Compare integer point differences to avoid rounding at exactly 5 percentage points.
+ const nearby=total?ranked.filter(x=>(ranked[0].score-x.score)*20<total).map(x=>x.type):[];
+ return {scores,total,ranked,leaders,nearby,interpretationVersion:2,empty:total===0,close:nearby.length>1,uniform:new Set(themes.flatMap(t=>t.items.map(i=>answers[i.id]))).size===1};
 }
 if(typeof module!=='undefined')module.exports={calculate,itemPoints};else root.TraitsScore={calculate,itemPoints};
 })(globalThis);
